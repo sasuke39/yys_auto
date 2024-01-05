@@ -1,0 +1,29 @@
+[
+  {
+    "itemName": "remain_ap",
+    "roiFront": "1177,674,80,25",
+    "roiBack": "1177,674,80,25",
+    "mode": "DigitCounter",
+    "method": "Default",
+    "keyword": "",
+    "description": "体力的数量检测"
+  },
+  {
+    "itemName": "remain_ap_activity",
+    "roiFront": "707,24,106,34",
+    "roiBack": "707,24,106,34",
+    "mode": "DigitCounter",
+    "method": "Default",
+    "keyword": "",
+    "description": "活动体力的剩余检测"
+  },
+  {
+    "itemName": "remain_buy",
+    "roiFront": "808,531,39,42",
+    "roiBack": "808,531,39,42",
+    "mode": "DigitCounter",
+    "method": "Default",
+    "keyword": "",
+    "description": "还有多少次购买体力的机会"
+  }
+]
