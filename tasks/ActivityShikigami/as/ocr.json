@@ -25,5 +25,23 @@
     "method": "Default",
     "keyword": "",
     "description": "还有多少次购买体力的机会"
+  },
+  {
+    "itemName": "need_ap_ac",
+    "roiFront": "1135,495,63,30",
+    "roiBack": "1135,495,63,30",
+    "mode": "Digit",
+    "method": "Default",
+    "keyword": "",
+    "description": "Ocr-description"
+  },
+  {
+    "itemName": "need_ap_game",
+    "roiFront": "1138,497,75,29",
+    "roiBack": "1138,497,75,29",
+    "mode": "Digit",
+    "method": "Default",
+    "keyword": "",
+    "description": "Ocr-description"
   }
 ]

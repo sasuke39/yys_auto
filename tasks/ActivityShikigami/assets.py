@@ -65,4 +65,8 @@ class ActivityShikigamiAssets:
 	# 还有多少次购买体力的机会 
 	O_REMAIN_BUY = RuleOcr(roi=(1010,22,39,42), area=(1010,22,39,42), mode="DigitCounter", method="Default", keyword="", name="remain_buy")
 
+	O_NEED_AP_GAME = RuleOcr(roi=(1138,497,75,29), area=(1138,497,75,29), mode="Digit", method="Default", keyword="", name="need_ap_game")
+
+	O_NEED_AP_AC = RuleOcr(roi=(1135,495,63,30), area=(1135,495,63,30), mode="Digit", method="Default", keyword="", name="need_ap_ac")
+
 

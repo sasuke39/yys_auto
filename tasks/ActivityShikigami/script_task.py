@@ -4,6 +4,9 @@
 import random
 from datetime import datetime, timedelta, time
 
+from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
+from tasks.GameUi.game_ui import GameUi
+from tasks.GameUi.page import page_shikigami_records, page_main
 from tasks.base_task import BaseTask
 from tasks.Component.GeneralBattle.general_battle import GeneralBattle
 from tasks.AreaBoss.assets import AreaBossAssets
@@ -14,9 +17,17 @@ from module.logger import logger
 from module.exception import TaskEnd
 
 
-class ScriptTask(BaseActivity, ActivityShikigamiAssets):
+class ScriptTask(BaseActivity, ActivityShikigamiAssets, SwitchSoul, GameUi):
 
     def run(self) -> None:
+
+        if self.config.activity_shikigami.switch_soul.enable:
+            self.ui_get_current_page()
+            self.ui_goto(page_shikigami_records)
+            self.run_switch_soul(self.config.activity_shikigami.switch_soul.switch_group_team)
+
+        self.ui_get_current_page()
+        self.ui_goto(page_main)
 
         config = self.config.activity_shikigami
         self.limit_time: timedelta = config.general_climb.limit_time
@@ -64,7 +75,16 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
                 break
             # 2
             self.wait_until_appear(self.I_FIRE)
-            is_remain = self.check_ap_remain(current_ap)
+            need_ap = None
+            screenshot = self.screenshot()
+            # self.device.image_show()
+            if current_ap == ApMode.AP_GAME:
+                need_ap = self.O_NEED_AP_GAME.ocr_digit(image=screenshot)
+
+            if current_ap == ApMode.AP_ACTIVITY:
+                need_ap = self.O_NEED_AP_AC.ocr_digit(image=screenshot)
+
+            is_remain = self.check_ap_remain(current_ap, need_ap)
             # 如果没有剩余了且这个时候是体力，就退出活动
             if not is_remain and current_ap == ApMode.AP_GAME:
                 logger.info("Game ap out")
@@ -75,10 +95,13 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
                     logger.info("Activity ap out and switch to game ap")
                     current_ap = ApMode.AP_GAME
                     self.switch(current_ap)
+                    need_ap = self.O_NEED_AP_GAME.ocr_digit(image=self.screenshot())
+                    is_remain = self.check_ap_remain(current_ap, need_ap)
+                    if not is_remain:
+                        break
                 else:
                     logger.info("Activity ap out")
                     break
-
 
             # 点击战斗
 
@@ -97,7 +120,6 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
         self.set_next_run(task="ActivityShikigami", success=True)
         raise TaskEnd
 
-
     def home_main(self) -> bool:
         """
         从庭院到活动的爬塔界面
@@ -115,8 +137,6 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
             if self.appear_then_click(self.I_GOLD, interval=1):
                 continue
 
-
-
     def main_home(self) -> bool:
         """
         从活动的爬塔界面到庭院
@@ -132,8 +152,7 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
             if self.appear_then_click(self.I_BACK_GREEN, interval=1):
                 continue
 
-
-    def check_ap_remain(self, current_ap: ApMode) -> bool:
+    def check_ap_remain(self, current_ap: ApMode, need_ap: int) -> bool:
         """
         检查体力是否足够
         :return: 如何还有体力，返回True，否则返回False
@@ -141,7 +160,7 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
         self.screenshot()
         if current_ap == ApMode.AP_ACTIVITY:
             cu, res, total = self.O_REMAIN_AP_ACTIVITY.ocr(image=self.device.image)
-            if cu == 0 and cu + res == total:
+            if cu < need_ap and cu + res == total:
                 logger.warning("Activity ap not enough")
                 return False
             return True
@@ -218,6 +237,7 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
 if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
+
     c = Config('oas2')
     d = Device(c)
     t = ScriptTask(c, d)
