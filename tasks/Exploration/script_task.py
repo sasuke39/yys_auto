@@ -11,7 +11,7 @@ from tasks.GameUi.game_ui import GameUi
 from tasks.GameUi.page import page_exploration, page_shikigami_records, page_main
 
 from module.logger import logger
-from module.exception import RequestHumanTakeover
+from module.exception import RequestHumanTakeover, TaskEnd
 from module.atom.image_grid import ImageGrid
 
 
@@ -37,7 +37,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
             self.ui_goto(page_shikigami_records)
             self.run_switch_soul_by_name(explorationConfig.switch_soul_config.group_name,
                                          explorationConfig.switch_soul_config.team_name)
-
+        next_run_time = explorationConfig.success_interval
         # 开启加成
         con = self.config.exploration.exploration_config
         if con.buff_gold_50_click or con.buff_gold_100_click:
@@ -69,11 +69,14 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
                 if self.wait_until_appear(self.I_E_EXPLORATION_CLICK, wait_time=1):
                     self.click(self.I_E_EXPLORATION_CLICK)
                     count += 1
+                    logger.info("exploration current count : %s" % count)
                     # 进入战斗环节
                     self.battle_process()
                 if self.appear_then_click(self.I_EXPLORATION_TITLE):
                     self.open_expect_level()
 
+        self.set_next_run(task="Exploration", success=True)
+        raise TaskEnd('Exploration')
     # 查找指定的章节：
     def open_expect_level(self):
         swipeCount = 0
@@ -227,7 +230,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
         if self.config.exploration.exploration_config.auto_rotate == AutoRotate.yes:
             self.enter_settings_and_do_operations()
 
-        # 进入战斗环节
+        # 进入战斗环节 一次探索到打完boss退出的环节
         self.do_battle()
 
 
@@ -235,7 +238,7 @@ if __name__ == "__main__":
     from module.config.config import Config
     from module.device.device import Device
 
-    config = Config('oas1')
+    config = Config('oas2')
     device = Device(config)
     t = ScriptTask(config, device)
     t.config.exploration.exploration_config.exploration_level = '第二十八章'

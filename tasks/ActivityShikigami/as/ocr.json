@@ -1,8 +1,8 @@
 [
   {
     "itemName": "remain_ap",
-    "roiFront": "1177,674,80,25",
-    "roiBack": "1177,674,80,25",
+    "roiFront": "1159,674,104,34",
+    "roiBack": "1159,674,104,34",
     "mode": "DigitCounter",
     "method": "Default",
     "keyword": "",
@@ -10,8 +10,8 @@
   },
   {
     "itemName": "remain_ap_activity",
-    "roiFront": "707,24,106,34",
-    "roiBack": "707,24,106,34",
+    "roiFront": "910,22,100,35",
+    "roiBack": "910,22,100,35",
     "mode": "DigitCounter",
     "method": "Default",
     "keyword": "",
@@ -19,8 +19,8 @@
   },
   {
     "itemName": "remain_buy",
-    "roiFront": "808,531,39,42",
-    "roiBack": "808,531,39,42",
+    "roiFront": "1010,22,39,42",
+    "roiBack": "1010,22,39,42",
     "mode": "DigitCounter",
     "method": "Default",
     "keyword": "",

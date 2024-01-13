@@ -24,26 +24,26 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
             self.limit_time = timedelta(hours=self.limit_time.hour, minutes=self.limit_time.minute,
                                         seconds=self.limit_time.second)
         self.limit_count = config.general_climb.limit_count
-
+        # 进入到爬塔挑战页面
         self.home_main()
 
-        # 设定是否锁定阵容
-        if config.general_battle.lock_team_enable:
-            logger.info("Lock team")
-            while 1:
-                self.screenshot()
-                if self.appear_then_click(self.I_UNLOCK, interval=1):
-                    continue
-                if self.appear(self.I_LOCK):
-                    break
-        else:
-            logger.info("Unlock team")
-            while 1:
-                self.screenshot()
-                if self.appear_then_click(self.I_LOCK, interval=1):
-                    continue
-                if self.appear(self.I_UNLOCK):
-                    break
+        # # 设定是否锁定阵容
+        # if config.general_battle.lock_team_enable:
+        #     logger.info("Lock team")
+        #     while 1:
+        #         self.screenshot()
+        #         if self.appear_then_click(self.I_UNLOCK, interval=1):
+        #             continue
+        #         if self.appear(self.I_LOCK):
+        #             break
+        # else:
+        #     logger.info("Unlock team")
+        #     while 1:
+        #         self.screenshot()
+        #         if self.appear_then_click(self.I_LOCK, interval=1):
+        #             continue
+        #         if self.appear(self.I_UNLOCK):
+        #             break
 
         # 选择是游戏的体力还是活动的体力
         current_ap = config.general_climb.ap_mode
@@ -110,9 +110,9 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
                 break
             if self.appear_then_click(self.I_SHI, interval=1):
                 continue
-            if self.appear_then_click(self.I_DRUM, interval=1):
+            if self.appear_then_click(self.I_GE_LOU, interval=1):
                 continue
-            if self.appear_then_click(self.I_BATTLE, interval=1):
+            if self.appear_then_click(self.I_GOLD, interval=1):
                 continue
 
 
@@ -218,7 +218,7 @@ class ScriptTask(BaseActivity, ActivityShikigamiAssets):
 if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
-    c = Config('oas1')
+    c = Config('oas2')
     d = Device(c)
     t = ScriptTask(c, d)
 
