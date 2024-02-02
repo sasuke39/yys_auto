@@ -28,8 +28,8 @@
   },
   {
     "itemName": "need_ap_ac",
-    "roiFront": "1135,495,63,30",
-    "roiBack": "1135,495,63,30",
+    "roiFront": "1156,494,43,32",
+    "roiBack": "1156,494,43,32",
     "mode": "Digit",
     "method": "Default",
     "keyword": "",

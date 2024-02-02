@@ -20,7 +20,7 @@
   {
     "itemName": "orochi_lock",
     "imageName": "o_orochi_lock.png",
-    "roiFront": "557,563,31,32",
+    "roiFront": "571,558,31,32",
     "roiBack": "548,554,101,54",
     "method": "Template matching",
     "threshold": 0.8,
@@ -29,7 +29,7 @@
   {
     "itemName": "orochi_unlock",
     "imageName": "o_orochi_unlock.png",
-    "roiFront": "562,564,26,29",
+    "roiFront": "575,558,26,29",
     "roiBack": "550,553,100,51",
     "method": "Template matching",
     "threshold": 0.8,
@@ -38,8 +38,8 @@
   {
     "itemName": "orochi_fire",
     "imageName": "o_orochi_fire.png",
-    "roiFront": "1095,577,131,124",
-    "roiBack": "1095,577,131,124",
+    "roiFront": "1119,612,73,60",
+    "roiBack": "1119,612,73,60",
     "method": "Template matching",
     "threshold": 0.6,
     "description": "点击挑战"

@@ -67,6 +67,6 @@ class ActivityShikigamiAssets:
 
 	O_NEED_AP_GAME = RuleOcr(roi=(1138,497,75,29), area=(1138,497,75,29), mode="Digit", method="Default", keyword="", name="need_ap_game")
 
-	O_NEED_AP_AC = RuleOcr(roi=(1135,495,63,30), area=(1135,495,63,30), mode="Digit", method="Default", keyword="", name="need_ap_ac")
+	O_NEED_AP_AC = RuleOcr(roi=(1156,494,43,32), area=(1156,494,43,32), mode="Digit", method="Default", keyword="", name="need_ap_ac")
 
 

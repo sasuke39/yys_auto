@@ -339,7 +339,7 @@ class Config(ConfigState, ConfigManual, ConfigWatcher, ConfigMenu):
         return notifier
 
 if __name__ == '__main__':
-    config = Config(config_name='oas1')
+    config = Config(config_name='oas2')
     config.update_scheduler()
     print(config.waiting_task)
 

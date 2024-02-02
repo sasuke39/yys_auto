@@ -59,8 +59,16 @@ class Filter:
                 else:
                     # Drop this object
                     pass
-
-        return out
+        # 除了restart，其他任务应该按照时间排队
+        out_by_time = sorted(out, key=lambda x: x.next_run)
+        restart_index = None
+        for index, obj in enumerate(out_by_time):
+            if str(obj.__getattribute__("command")).lower() == str("restart"):
+                restart_index = index
+        if restart_index:
+            obj_restart = out_by_time.pop(restart_index)
+            out_by_time.insert(0, obj_restart)
+        return out_by_time
 
     def apply_filter_to_obj(self, obj, filter):
         """

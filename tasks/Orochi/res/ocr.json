@@ -7,5 +7,14 @@
     "method": "Default",
     "keyword": "",
     "description": "Ocr-description"
+  },
+  {
+    "itemName": "o_test_fire",
+    "roiFront": "1110,591,94,92",
+    "roiBack": "1110,591,94,92",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "Ocr-description"
   }
 ]

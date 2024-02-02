@@ -316,26 +316,26 @@ class ScriptTask(GeneralBattle, GeneralInvite, GeneralBuff, GeneralRoom, GameUi,
 if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
-    from memory_profiler import profile
-    c = Config('oas1')
+    # from memory_profiler import profile
+    c = Config('oas2')
     d = Device(c)
     t = ScriptTask(c, d)
 
-    # t.run()
+    t.run()
 
     # t.check_layer('悲')
-
-    from module.base.timer import timer
-
-    @timer
-    @profile
-    def test_memory():
-        t.screenshot()
-        print(t.ocr_appear(t.O_O_TEST_OCR))
-        print(t.L_LAYER_LIST.image_appear(t.device.image, '叁'))
-    for i in range(4):
-        test_memory()
-        print('=====================')
+    #
+    # from module.base.timer import timer
+    #
+    # @timer
+    # @profile
+    # def test_memory():
+    #     t.screenshot()
+    #     print(t.ocr_appear(t.O_O_TEST_OCR))
+    #     print(t.L_LAYER_LIST.image_appear(t.device.image, '叁'))
+    # for i in range(4):
+    #     test_memory()
+    #     print('=====================')
 
 
 
